@@ -119,7 +119,7 @@ if s:path =~# '/app/\w\+/concerns/.*\.rb$'
   syn match rubyMacro '\v<%(included|class_methods)>[!?:]@!'
 endif
 
-if s:path =~# '\v/app/%(controllers|helpers|mailers)/.*\.rb$|/app/views/|/test/(controllers|integration|system)/.*_test\.rb$|/spec/(features|requests)/.*_spec\.rb$'
+if s:path =~# '\v/app/%(controllers|helpers|mailers)/.*\.rb$|/app/views/|/test/(controllers|integration|system)/.*_test\.rb$|/spec/(features|requests|integration|api)/.*_spec\.rb$'
   syn match rubyUrlHelper '\v<%(url_for|polymorphic_path|polymorphic_url|edit_polymorphic_path|edit_polymorphic_url|new_polymorphic_path|new_polymorphic_url)>[!?:]@!'
 endif
 
@@ -223,9 +223,9 @@ if s:has_app && rails#buffer().type_name('test', 'spec')
   syn match rubyTestMacro '\v<%(fixtures|use_transactional_tests|use_instantiated_fixtures)>[!?:]@!'
   syn match rubyTestHelper '\v<%(file_fixture)>[!?:]@!'
 endif
-if s:path =~# '\v/test/%(controllers|integration)/.*_test\.rb$|/spec/%(controllers|requests)/.*_spec\.rb$'
-  syn match   rubyTestAction '\v\.@<!<%(get|post|put|patch|delete|head|process)>[?!:]@!'
-  syn match   rubyTestAction '\v<follow_redirect![[:keyword:]!?:]@!'
+if s:path =~# '\v/test/%(controllers|integration)/.*_test\.rb$|/spec/%(controllers|requests|integration|api)/.*_spec\.rb$'
+  syn match rubyTestAction '\v\.@<!<%(get|post|put|patch|delete|head|process)>[?!:]@!'
+  syn match rubyTestAction '\v<follow_redirect![[:keyword:]!?:]@!'
   syn match rubyTestAction '\v<%(get_via_redirect|post_via_redirect)>[!?:]@!'
   syn match rubyTestHelper '\v<%(request|response|flash|session|cookies|fixture_file_upload)>[!?:]@!'
 endif
