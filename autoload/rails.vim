@@ -2104,6 +2104,7 @@ function! rails#complete_rails(ArgLead, CmdLine, P, ...) abort
     elseif target ==# 'integration_test' || target ==# 'integration_spec' || target ==# 'feature'
       return s:autocamelize(
             \ app.relglob('test/integration/','**/*','_test.rb') +
+            \ app.relglob('spec/api/', '**/*', '_spec.rb') +
             \ app.relglob('spec/features/', '**/*', '_spec.rb') +
             \ app.relglob('spec/requests/', '**/*', '_spec.rb') +
             \ app.relglob('features/', '**/*', '.feature'), a:ArgLead)
@@ -4432,6 +4433,15 @@ let s:has_projections = {
       \  "rails3": {"config/application.rb": {"type": "environment"}},
       \  "spec": {
       \    "spec/*_spec.rb": {"alternate": "app/{}.rb"},
+      \    "spec/api/*_spec.rb": {
+      \      "template": [
+      \        "require 'rails_helper'",
+      \        "",
+      \        "RSpec.describe \"{underscore|capitalize|blank}\", type: :request do",
+      \        "end"
+      \      ],
+      \      "type": "integration test"
+      \    },
       \    "spec/controllers/*_spec.rb": {
       \      "template": [
       \        "require 'rails_helper'",
@@ -4824,7 +4834,7 @@ function! s:app_internal_load_path() dict abort
     let path += ['test', 'test/unit', 'test/functional', 'test/integration', 'test/controllers', 'test/helpers', 'test/mailers', 'test/models', 'test/jobs']
   endif
   if self.has('spec')
-    let path += ['spec', 'spec/controllers', 'spec/helpers', 'spec/mailers', 'spec/models', 'spec/views', 'spec/lib', 'spec/features', 'spec/requests', 'spec/integration', 'spec/jobs']
+    let path += ['spec', 'spec/controllers', 'spec/helpers', 'spec/mailers', 'spec/models', 'spec/views', 'spec/lib', 'spec/features', 'spec/requests', 'spec/integration', 'spec/api', 'spec/jobs']
   endif
   if self.has('cucumber')
     let path += ['features']
