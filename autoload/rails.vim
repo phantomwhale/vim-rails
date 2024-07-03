@@ -2106,6 +2106,7 @@ function! rails#complete_rails(ArgLead, CmdLine, P, ...) abort
             \ app.relglob('test/integration/','**/*','_test.rb') +
             \ app.relglob('spec/api/', '**/*', '_spec.rb') +
             \ app.relglob('spec/features/', '**/*', '_spec.rb') +
+            \ app.relglob('spec/integration/', '**/*', '_spec.rb') +
             \ app.relglob('spec/requests/', '**/*', '_spec.rb') +
             \ app.relglob('features/', '**/*', '.feature'), a:ArgLead)
     elseif target ==# 'migration' || target ==# 'session_migration'
